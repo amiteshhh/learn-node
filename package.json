@@ -1,0 +1,25 @@
+{
+  "name": "homewlearn-node",
+  "version": "1.0.0",
+  "description": "epam node js introductory program learning",
+  "main": "index.js",
+  "scripts": {
+    "babel-node": "babel-node index.js",
+    "start": "nodemon --exec npm run babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amitesh Kumar <amiteshhh.nitk.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/node": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-stage-2": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  }
+}
