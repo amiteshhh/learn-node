@@ -13,11 +13,11 @@
 ```javascript
 // === streams.js ===
 // Main actions to be called
-function​​​reverse​​(str) { ​/* ... */​ }
-function​​​transform​​(str) { ​/* ... */​ }
-function​​​outputFile​​(filePath) { ​/* ... */​ }
-function​​​convertFromFile​​(filePath) { ​/* ... */​ }
-function​​​convertToFile​​(filePath) { ​/* ... */​ }
+function​​​ reverse​​(str) { ​/* ... */​ }
+function ​​​transform​​(str) { ​/* ... */​ }
+function ​​​outputFile​​(filePath) { ​/* ... */​ }
+function​​​ convertFromFile​​(filePath) { ​/* ... */​ }
+function​​​ convertToFile​​(filePath) { ​/* ... */​ }
 /* * * **** CODE WHICH IMPLEMENTS COMMAND LINE INTERACTION **** * */
 // === Terminal ===
 ./streams.js --action=outputFile --file=users.csv
