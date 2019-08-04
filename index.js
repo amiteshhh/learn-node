@@ -1,6 +1,3 @@
-import { json } from './config/json';
-import { User, Product, Importer } from './models';
-console.log(json.app);
-var user = new User();
-var product = new Product();
-var importer = new Importer();
+import app from './app'; 
+const port = process.env.PORT || 8080; 
+app.listen(port, () => console.log(`App listening on port ​${port}​!`))
