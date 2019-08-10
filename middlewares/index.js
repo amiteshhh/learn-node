@@ -1,2 +1,2 @@
-export { default as parsedCookiesMW } from './parsed-cookies.middleware';
-export { default as parsedQueryMW } from './parsed-query.middleware';
+export { default as parsedCookies } from './parsed-cookies.middleware';
+export { default as parsedQuery } from './parsed-query.middleware';

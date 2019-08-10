@@ -1,7 +1,7 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-import {productController} from './../controllers/product.controller'
+import productController from '../controllers/product.controller'
 
 router.route('/')
     .get(productController.findAll)

@@ -1,15 +1,14 @@
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-import { parsedCookiesMW, parsedQueryMW } from './middlewares';
+import { parsedCookies, parsedQuery } from './middlewares';
 
-import productRoutes from './routes/product.route';
-import userRoutes from './routes/user.route';
+import { productRoutes, userRoutes } from './routes';
 
 app.use(bodyParser.json()) // for parsing application/json
-app.use(parsedCookiesMW)
-app.use(parsedQueryMW)
+app.use(parsedCookies)
+app.use(parsedQuery)
 
 app.get('/', function (req, res) {
     res.redirect('/api/products');
@@ -17,4 +16,4 @@ app.get('/', function (req, res) {
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
-export default app;
+export { app };
