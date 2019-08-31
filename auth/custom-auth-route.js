@@ -1,6 +1,7 @@
 /**
- * Authentication route to validate user id and password. It uses jwt token and Bearer authentication mechanism
- * On successful authentication it returns the jwt.
+ * Custom Authentication
+ * Authentication route to receive user id/password and validate against db. 
+ * On successful authentication it generates the jwt token and returns the user info along with token and expiration.
  */
 
 const express = require('express');
