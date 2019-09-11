@@ -1,32 +1,60 @@
-let products = [{ id: 1, name: 'es8' }, { id: 2, name: 'Babel' }];
-let reviews = [{ id: 1, productId: 1, reviews: ['Sample Review 1', 'Sample Review 2'] }];//sample review would be complex object in real scenario
+const models = require('../models');
 
 function findAll(req, res) {
-    res.json(products);
+    models.Product.findAll().then((items) => {
+        res.json({
+            status: 'OK',
+            data: items
+        });
+    });
 }
 
 function findOne(req, res) {
     const id = Number(req.params.id);
-    const product = products.find(item => item.id === id);
-    res.json(product || null);
+    models.Product.findByPk(id).then((items) => {
+        res.json({
+            status: 'OK',
+            data: items
+        });
+    });
 }
 
 function findAllReviews(req, res) {
-    const id = Number(req.params.id);
-    const productReview = reviews.find(review => review.productId === id);
-    res.json(productReview ? productReview.reviews : null);
+    const productId = Number(req.params.id);
+    models.ProductReview.findAll({
+        where: { ProductId: productId }
+    }).then((items) => {
+        res.json({
+            status: 'OK',
+            data: items
+        });
+    });
 }
 
-function insertOne(req, res) {
-    const product = req.body;
-    product.id = Date.now();//for demo only
-    products.push(product);
-    res.json(product);
+function createProduct(req, res) {
+    const body = req.body;
+    models.Product.create(body).then(([item, created]) => {
+        res.json({
+            status: 'OK',
+            data: item
+        });
+    });
+}
+
+function createReview(req, res) {
+    const review = req.body;
+    models.ProductReview.create(review).then(([item, created]) => {
+        res.json({
+            status: 'OK',
+            data: item
+        });
+    });
 }
 
 export default {
     findAll,
     findOne,
     findAllReviews,
-    insertOne,
+    createProduct,
+    createReview
 }

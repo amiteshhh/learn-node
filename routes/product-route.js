@@ -5,12 +5,14 @@ import productController from '../controllers/product.controller'
 
 router.route('/')
     .get(productController.findAll)
-    .post(productController.insertOne);
+    .post(productController.createProduct);
 
 
 router.get('/:id', productController.findOne)
 
-router.get('/:id/review', productController.findAllReviews)
+router.route('/:id/review')
+    .get(productController.findAllReviews)
+    .post(productController.createReview)
 
 export default router;
 // module.exports = router;
