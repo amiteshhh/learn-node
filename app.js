@@ -28,7 +28,7 @@ app.use(passport.session())//validate subsequent route using session
 // setupLocalPassportStrategy();
 // setupFacebookPassportStrategy();
 // setupTwitterPassportStrategy();
-setupGooglePassportStrategy();
+// setupGooglePassportStrategy();
 
 
 // #########  CUSTOM AUTH LOGIN
@@ -99,8 +99,9 @@ app.get('/', function (req, res) {
     res.redirect('/api/products');
 });
 
-app.use('/api/products', checkPassportAuth, productRoutes);//using passport
-app.use('/api/users', checkCustomAuth, userRoutes);//using custom authentication
+app.use('/api/products', productRoutes);//using passport
+app.use('/api/users', userRoutes);//using custom authentication
+// app.use('/api/users', checkCustomAuth, userRoutes);//using custom authentication
 
 // #########  UTILITY ROUTES
 app.get('/401', (req, res) => {

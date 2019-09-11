@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.json([{ id: 1, name: 'Amitesh kumar' }]);//can be connected to db or json file
-})
+import {userController} from '../controllers';
+
+router.get('/:id', userController.findOne);
+router.get('/', userController.findAll);
+router.post('/', userController.createUser);
 
 export default router;//needs babel
 // module.exports = router;
