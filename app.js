@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport')
 
-import { parsedCookies, parsedQuery } from './middlewares';
+import { parsedCookies, parsedQuery, lastModifiedDate } from './middlewares';
 
 import { productRoutes, userRoutes } from './routes';
 import {
@@ -98,9 +98,8 @@ app.get('/auth/google/callback',
 app.get('/', function (req, res) {
     res.redirect('/api/products');
 });
-
-app.use('/api/products', productRoutes);//using passport
-app.use('/api/users', userRoutes);//using custom authentication
+app.use('/api/products',lastModifiedDate, productRoutes);//using passport
+app.use('/api/users',lastModifiedDate, userRoutes);//using custom authentication
 // app.use('/api/users', checkCustomAuth, userRoutes);//using custom authentication
 
 // #########  UTILITY ROUTES
