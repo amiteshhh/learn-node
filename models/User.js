@@ -1,50 +1,20 @@
-const crypto = require('crypto')
-const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
 
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+const schema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: (v) => {
+        return !/^[0-9]/.test(v);
+      },
+      message: props => `${props.value} is not a valid user name. It should not start with number!`
     },
-    password: {
-      type: Sequelize.STRING,
-      get() {
-        return () => this.getDataValue('password')
-      }
-    },
-    salt: {
-      type: Sequelize.STRING,
-      get() {
-        return () => this.getDataValue('salt')
-      }
-    }
-  }, {});
-  User.associate = function (models) {
-    // associations can be defined here
-  };
-  User.generateSalt = function () {
-    return crypto.randomBytes(16).toString('base64')
-  }
-  User.encryptPassword = function (plainText, salt) {
-    return crypto
-      .createHash('RSA-SHA256')
-      .update(plainText)
-      .update(salt)
-      .digest('hex')
-  }
-  const setSaltAndPassword = user => {
-    if (user.changed('password')) {
-      user.salt = User.generateSalt()
-      user.password = User.encryptPassword(user.password(), user.salt())
-    }
-  }
-  User.correctPassword = (enteredPassword) => {
-    return User.encryptPassword(enteredPassword, this.salt()) === this.password()
-  }
+  },
+  password: String,
+  // lastModifiedDate: Date//set from express middleware just for tutorial purpose or better use below
+  lastModifiedDate:  { type : Date, default: Date.now }
+});
 
-  User.beforeCreate(setSaltAndPassword)
-  User.beforeUpdate(setSaltAndPassword)
-  return User;
-};
+module.exports = mongoose.model('User', schema)
