@@ -1,5 +1,5 @@
 const models = require('../models');
-
+const serverUtils = require('../utils').serverUtils;
 
 function sendError(res, err) {
     res.status(400).json({
@@ -12,6 +12,7 @@ function findAll(req, res) {
         if (err) {
             return sendError(res, err)
         }
+        serverUtils.sendSuccessResponse(items);
         res.json({
             status: 'OK',
             data: items
